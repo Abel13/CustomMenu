@@ -1,0 +1,101 @@
+﻿<Window x:Class="CustomMenu.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomMenu"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Height="600" Width="1080" Background="#FF292929" ResizeMode="NoResize" WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+
+  <Window.Resources>
+    <Storyboard x:Key="Move0">
+      <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipse">
+        <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+          <EasingDoubleKeyFrame.EasingFunction>
+            <BackEase EasingMode="EaseInOut"/>
+          </EasingDoubleKeyFrame.EasingFunction>
+        </EasingDoubleKeyFrame>
+      </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+
+    <Storyboard x:Key="Move1">
+      <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipse">
+        <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="40">
+          <EasingDoubleKeyFrame.EasingFunction>
+            <BackEase EasingMode="EaseInOut"/>
+          </EasingDoubleKeyFrame.EasingFunction>
+        </EasingDoubleKeyFrame>
+      </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+
+    <Storyboard x:Key="Move2">
+      <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipse">
+        <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="80">
+          <EasingDoubleKeyFrame.EasingFunction>
+            <BackEase EasingMode="EaseInOut"/>
+          </EasingDoubleKeyFrame.EasingFunction>
+        </EasingDoubleKeyFrame>
+      </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+  </Window.Resources>
+
+  <Window.Triggers>
+    <EventTrigger RoutedEvent="ListBoxItem.Selected" SourceName="item0">
+      <BeginStoryboard x:Name="Move0_BeginStoryboard" Storyboard="{StaticResource Move0}"/>
+    </EventTrigger>
+    <EventTrigger RoutedEvent="ListBoxItem.Selected" SourceName="item1">
+      <BeginStoryboard x:Name="Move1_BeginStoryboard" Storyboard="{StaticResource Move1}"/>
+    </EventTrigger>
+    <EventTrigger RoutedEvent="ListBoxItem.Selected" SourceName="item2">
+      <BeginStoryboard x:Name="Move2_BeginStoryboard" Storyboard="{StaticResource Move2}"/>
+    </EventTrigger>
+  </Window.Triggers>
+  
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="40"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <Border Grid.Row="0" BorderBrush="{StaticResource SecondaryAccentBrush}" BorderThickness="0 0 0 1">
+      <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+        <Button Style="{StaticResource MaterialDesignFlatButton}">
+          <materialDesign:PackIcon Kind="Minus"/>
+        </Button>
+        <Button Style="{StaticResource MaterialDesignFlatButton}">
+          <materialDesign:PackIcon Kind="Close"/>
+        </Button>
+      </StackPanel>
+    </Border>
+
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="200"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <ListView Width="200" HorizontalAlignment="Left">
+        <ListViewItem x:Name="item0" Content="HOME" Height="40"/>
+        <ListViewItem x:Name="item1" Content="BROWSE" Height="40"/>
+        <ListViewItem x:Name="item2" Content="RADIO" Height="40"/>
+      </ListView>
+
+      <Grid Grid.ColumnSpan="2" Width="5" Margin="195 0" HorizontalAlignment="Left">
+        <Rectangle Fill="{StaticResource SecondaryAccentBrush}" Width="2" HorizontalAlignment="Right"/>
+        <Ellipse x:Name="ellipse" Width="10" Height="10" VerticalAlignment="Top" Fill="{StaticResource SecondaryAccentBrush}" Margin="0 15" 
+                 RenderTransformOrigin="0.5, 0.5">
+          <Ellipse.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform/>
+              <SkewTransform/>
+              <RotateTransform/>
+              <TranslateTransform/>
+            </TransformGroup>
+          </Ellipse.RenderTransform>
+        </Ellipse>
+      </Grid>
+    </Grid>
+  </Grid>
+</Window>
